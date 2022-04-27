@@ -1,4 +1,4 @@
-package com.example.diarybook;
+package com.example.diarybook.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.diarybook.R;
+import com.example.diarybook.model.enity.Diary;
 
 import java.util.List;
 
@@ -54,7 +57,7 @@ public class DiariesAdapter extends RecyclerView.Adapter<DiariesAdapter.DiaryHol
         return mDiaries.size();
     }
 
-    public class DiaryHolder extends RecyclerViewHolder<Diary>{
+    public class DiaryHolder extends RecyclerViewHolder<Diary> {
 
         private View.OnLongClickListener mOnLongClickListener;
 

@@ -2,6 +2,8 @@ package com.example.diarybook;
 
 import androidx.annotation.NonNull;
 
+import com.example.diarybook.model.enity.Diary;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 

@@ -1,6 +1,12 @@
-package com.example.diarybook;
+package com.example.diarybook.model.repository;
 
 import androidx.annotation.NonNull;
+
+import com.example.diarybook.DataCallback;
+import com.example.diarybook.model.datasource.DataSource;
+import com.example.diarybook.model.datasource.DiariesLocalDataSource;
+import com.example.diarybook.model.enity.Diary;
+import com.example.diarybook.utils.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

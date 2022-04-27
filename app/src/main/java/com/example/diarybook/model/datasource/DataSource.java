@@ -1,7 +1,9 @@
-package com.example.diarybook;
+package com.example.diarybook.model.datasource;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.diarybook.DataCallback;
 
 import java.util.List;
 

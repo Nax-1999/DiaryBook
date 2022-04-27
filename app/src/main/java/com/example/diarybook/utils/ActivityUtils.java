@@ -1,4 +1,4 @@
-package com.example.diarybook;
+package com.example.diarybook.utils;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.example.diarybook;
+package com.example.diarybook.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

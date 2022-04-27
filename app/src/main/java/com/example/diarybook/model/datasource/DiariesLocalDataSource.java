@@ -1,9 +1,13 @@
-package com.example.diarybook;
-
-import android.content.SharedPreferences;
+package com.example.diarybook.model.datasource;
 
 import androidx.annotation.NonNull;
 
+import com.example.diarybook.DataCallback;
+import com.example.diarybook.MockDiaries;
+import com.example.diarybook.model.enity.Diary;
+import com.example.diarybook.utils.CollectionUtils;
+import com.example.diarybook.utils.GsonUtils;
+import com.example.diarybook.utils.SharedPreferencesUtils;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -11,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DiariesLocalDataSource implements DataSource<Diary>{
+public class DiariesLocalDataSource implements DataSource<Diary> {
 
     private static volatile DiariesLocalDataSource mInstance;
 

@@ -1,4 +1,4 @@
-package com.example.diarybook;
+package com.example.diarybook.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.diarybook.DataCallback;
+import com.example.diarybook.DiariesFragment;
+import com.example.diarybook.model.repository.DiariesRepository;
+import com.example.diarybook.EnApplication;
+import com.example.diarybook.R;
+import com.example.diarybook.adapter.DiariesAdapter;
+import com.example.diarybook.model.enity.Diary;
 
 import java.util.ArrayList;
 import java.util.List;

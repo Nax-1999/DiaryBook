@@ -1,11 +1,12 @@
-package com.example.diarybook;
+package com.example.diarybook.utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.collection.SimpleArrayMap;
+
+import com.example.diarybook.EnApplication;
 
 public final class SharedPreferencesUtils {
     private static final SimpleArrayMap<String, SharedPreferencesUtils> mCaches

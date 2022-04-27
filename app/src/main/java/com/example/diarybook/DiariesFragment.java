@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.diarybook.controller.DiariesController;
+
 public class DiariesFragment extends Fragment {
 
     DiariesController mController;
@@ -29,7 +31,6 @@ public class DiariesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_diaries, container, false);
         mController.setDiariesList((RecyclerView) root.findViewById(R.id.diaries_list));
-
         return root;
     }
 

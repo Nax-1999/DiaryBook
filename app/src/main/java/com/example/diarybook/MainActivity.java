@@ -5,6 +5,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
+import com.example.diarybook.utils.ActivityUtils;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

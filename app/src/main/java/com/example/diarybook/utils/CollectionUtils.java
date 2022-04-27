@@ -1,4 +1,4 @@
-package com.example.diarybook;
+package com.example.diarybook.utils;
 
 import java.util.Map;
 

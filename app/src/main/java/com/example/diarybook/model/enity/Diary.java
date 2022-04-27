@@ -1,4 +1,4 @@
-package com.example.diarybook;
+package com.example.diarybook.model.enity;
 
 import androidx.annotation.Nullable;
 
