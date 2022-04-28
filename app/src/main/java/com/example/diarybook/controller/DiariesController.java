@@ -46,6 +46,10 @@ public class DiariesController {
         });
     }
 
+    /**
+     * 展开日记详情
+     * @param data
+     */
     private void showInputDialog(Diary data) {
         final EditText editText = new EditText(mView.getContext());
         editText.setText(data.getDescription());
@@ -63,6 +67,10 @@ public class DiariesController {
                 .show();
     }
 
+    /**
+     * 配置recyclerView
+     * @param recyclerView
+     */
     public void setDiariesList(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mView.getContext()));
         recyclerView.setAdapter(mListAdapter);
@@ -71,6 +79,9 @@ public class DiariesController {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    /**
+     * 从本地读取数据
+     */
     public void loadDiaries() {
         mDiariesRepository.getAll(new DataCallback<List<Diary>>() {
             @Override
@@ -93,6 +104,10 @@ public class DiariesController {
         Toast.makeText(mView.getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 更新日记列表
+     * @param diaryList
+     */
     private void processDiaries(List<Diary> diaryList) {
         mListAdapter.update(diaryList);
     }

@@ -21,6 +21,7 @@ public class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
     public void onBindView(T data) {
         mData = data;
     }
+
     public T getData() {
         return mData;
     }
