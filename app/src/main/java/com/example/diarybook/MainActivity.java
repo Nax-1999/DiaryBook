@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
+import com.example.diarybook.presenter.DiariesPresenter;
 import com.example.diarybook.utils.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             diariesFragment = new DiariesFragment();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), diariesFragment, R.id.content);
         }
+        diariesFragment.setPresenter(new DiariesPresenter(diariesFragment));
     }
 
     private DiariesFragment getDiariesFragment() {

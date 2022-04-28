@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Github/DiaryBook/app/src/main/res/layout/activity_diary_edit.xml" value="0.20652173913043478" />
         <entry key="..\:/Github/DiaryBook/app/src/main/res/layout/activity_main.xml" value="0.14792299898682879" />
         <entry key="..\:/Github/DiaryBook/app/src/main/res/layout/fragment_diaries.xml" value="0.14792299898682879" />
+        <entry key="..\:/Github/DiaryBook/app/src/main/res/layout/fragment_diary_edit.xml" value="0.20652173913043478" />
         <entry key="..\:/Github/DiaryBook/app/src/main/res/layout/list_diary_item.xml" value="0.14792299898682879" />
+        <entry key="..\:/Github/DiaryBook/app/src/main/res/menu/menu_done.xml" value="0.28854166666666664" />
         <entry key="..\:/Github/DiaryBook/app/src/main/res/menu/menu_write.xml" value="0.2994871794871795" />
       </map>
     </option>
