@@ -13,6 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 数据仓库类，被controller持有，根据需要从cache或DataSource读取
+ */
 public class DiariesRepository implements DataSource<Diary> {
 
     private static volatile DiariesRepository mInstance;//数据仓库实例

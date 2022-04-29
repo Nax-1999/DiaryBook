@@ -1,6 +1,7 @@
 package com.example.diarybook;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,36 +9,52 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.diarybook.controller.DiariesController;
+import com.example.diarybook.adapter.DiariesAdapter;
+import com.example.diarybook.contract.DiariesContract;
 
-public class DiariesFragment extends Fragment {
+public class DiariesFragment extends Fragment implements DiariesContract.View {
 
-    DiariesController mController;
+
+    private DiariesContract.Presenter mPresenter;
+
+    private RecyclerView mRecyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mController = new DiariesController(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_diaries, container, false);
-        mController.setDiariesList((RecyclerView) root.findViewById(R.id.diaries_list));
+        this.mRecyclerView = root.findViewById(R.id.diaries_list);
+        initDiariesList();
+        setHasOptionsMenu(true);
         return root;
+    }
+
+    public void initDiariesList() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //添加分割线
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mController.loadDiaries();
+        mPresenter.start();
     }
 
     @Override
@@ -49,10 +66,64 @@ public class DiariesFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                mController.gotoWriteDiary();
+                mPresenter.addDiary();
                 return true;
         }
         return false;
+    }
+
+
+    @Override
+    public void setPresenter(@NonNull DiariesContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        mPresenter.destroy();
+        super.onDestroy();
+    }
+
+//    @Override fixme 重写??
+    public void setListAdapter(DiariesAdapter diariesAdapter) {
+        mRecyclerView.setAdapter(diariesAdapter);
+    }
+
+    @Override
+    public void gotoUpdateDiary(String diaryId) {
+        Intent intent = new Intent(getContext(), DiaryEditActivity.class);
+        intent.putExtra(DiaryEditFragment.DIARY_ID, diaryId);
+        startActivity(intent);
+    }
+
+    public boolean isActive() {
+        return isAdded();
+    }
+
+    public void showError() {
+        showMessage(getString(R.string.error));
+    }
+
+    public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    public void gotoWriteDiary() {
+        Intent intent = new Intent(getContext(), DiaryEditActivity.class);
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void showInputDialog(String title, String desc) {
+
+    }
+
+    @Override
+    public void showSuccess() {
+        showMessage(getString(R.string.success));
     }
 
 

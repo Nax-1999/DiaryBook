@@ -14,6 +14,11 @@ public class MockDiaries {
         return Mock(new LinkedHashMap<String, Diary>());
     }
 
+    /**
+     * 初始化默认日记数据并以map返回
+     * @param date
+     * @return
+     */
     private static Map<String, Diary> Mock(Map<String, Diary> date) {
         Diary test1 = getDiary("2022-01-01 上班");
         date.put(test1.getId(), test1);
@@ -39,6 +44,9 @@ public class MockDiaries {
     }
 
     @NonNull
+    /**
+     * 根据标题创建日记实体
+     */
     private static Diary getDiary(String title) {
         return new Diary(title, DESCRIPTION);
     }

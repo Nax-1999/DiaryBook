@@ -15,6 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 本地数据处理层，直接操作sp
+ */
 public class DiariesLocalDataSource implements DataSource<Diary> {
 
     private static volatile DiariesLocalDataSource mInstance;
@@ -28,9 +31,10 @@ public class DiariesLocalDataSource implements DataSource<Diary> {
 
     private DiariesLocalDataSource() {
         mSpUtils = SharedPreferencesUtils.getInstance(DIARY_DATA);
+        //从sp读取全部日记json
         String diaryStr = mSpUtils.get(ALL_DIARY);
+        //将json解析全部日记map
         LOCAL_DATA = json2Obj(diaryStr);
-
         LinkedHashMap<String, Diary> diariesObj = json2Obj(diaryStr);
         if (!CollectionUtils.isEmpty(diariesObj)) {
             LOCAL_DATA = diariesObj;
@@ -50,10 +54,18 @@ public class DiariesLocalDataSource implements DataSource<Diary> {
         return mInstance;
     }
 
+    /**
+     * 将全部日记map转换成json
+     */
     private String obj2Json() {
         return GsonUtils.toJson(LOCAL_DATA);
     }
 
+    /**
+     * 从json解析全部日记信息
+     * @param diaryStr
+     * @return
+     */
     private LinkedHashMap<String, Diary> json2Obj(String diaryStr) {
         return GsonUtils.fromJson(diaryStr, new TypeToken<LinkedHashMap<String, Diary>>() {}.getType());
     }
