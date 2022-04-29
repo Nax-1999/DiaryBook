@@ -1,5 +1,6 @@
 package com.example.diarybook.presenter;
 
+import android.app.Activity;
 import android.view.View;
 
 import com.example.diarybook.DataCallback;
@@ -31,6 +32,14 @@ public class DiariesPresenter implements DiariesContract.Presenter {
     @Override
     public void destroy() {
 
+    }
+
+    @Override
+    public void onResult(int requestCode, int resultCode) {
+        if (Activity.RESULT_OK != resultCode) {
+            return;
+        }
+        mView.showSuccess();
     }
 
 

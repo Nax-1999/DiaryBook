@@ -12,12 +12,12 @@ public interface DiariesContract {
         void showError();
         boolean isActive();
         void setListAdapter(DiariesAdapter mListAdapter);
-
         void gotoUpdateDiary(String diaryId);
     }
 
     interface Presenter extends BasePresenter {
         void loadDiaries();
         void addDiary();
+        void onResult(int requestCode, int resultCode);
     }
 }

@@ -1,8 +1,10 @@
 package com.example.diarybook;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -86,7 +88,8 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
     public void gotoUpdateDiary(String diaryId) {
         Intent intent = new Intent(getContext(), DiaryEditActivity.class);
         intent.putExtra(DiaryEditFragment.DIARY_ID, diaryId);
-        startActivity(intent);
+        //此处不能使用书中的startActivity方法，否则返回第一个activity时不会执行onActivityResult
+        startActivityForResult(intent, 1);
     }
 
 
@@ -95,7 +98,7 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
         mRecyclerView.setAdapter(mListAdapter);
     }
 
-    
+
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
@@ -104,7 +107,7 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
     @Override
     public void gotoWriteDiary() {
         Intent intent = new Intent(getContext(), DiaryEditActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
 
 
@@ -121,6 +124,11 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
     @Override
     public boolean isActive() {
         return isAdded();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        mPresenter.onResult(requestCode, resultCode);
     }
 
 

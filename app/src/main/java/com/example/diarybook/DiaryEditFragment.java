@@ -94,18 +94,8 @@ public class DiaryEditFragment extends Fragment implements DiaryEditContract.Vie
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        mPresenter.onResult(requestCode, resultCode);
-    }
-
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-
-    public void showSuccess() {
-        showMessage(getString(R.string.success));
     }
 
     @Override
