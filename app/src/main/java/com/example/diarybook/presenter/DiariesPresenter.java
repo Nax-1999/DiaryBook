@@ -1,5 +1,6 @@
 package com.example.diarybook.presenter;
 
+import android.app.Activity;
 import android.view.View;
 
 import com.example.diarybook.DataCallback;
@@ -14,8 +15,7 @@ import java.util.List;
 public class DiariesPresenter implements DiariesContract.Presenter {
 
     private final DiariesContract.View mView;
-    private Diary mDiary;
-    DiariesAdapter mListAdapter;
+    private DiariesAdapter mListAdapter;
     private final DiariesRepository mDiariesRepository;
 
     public DiariesPresenter(DiariesContract.View mView) {
@@ -36,8 +36,12 @@ public class DiariesPresenter implements DiariesContract.Presenter {
 
     @Override
     public void onResult(int requestCode, int resultCode) {
-
+        if (Activity.RESULT_OK != resultCode) {
+            return;
+        }
+        mView.showSuccess();
     }
+
 
     @Override
     /**
@@ -77,8 +81,6 @@ public class DiariesPresenter implements DiariesContract.Presenter {
         mListAdapter.setOnLongClickListener(new DiariesAdapter.OnLongClickListener<Diary>() {
             @Override
             public boolean onLongClick(View v, Diary data) {
-                //fixme 长按应当是进入详情修改界面
-//                updateDiary(data);
                 mView.gotoUpdateDiary(data.getId());
                 return false;
             }
@@ -86,24 +88,5 @@ public class DiariesPresenter implements DiariesContract.Presenter {
         mView.setListAdapter(mListAdapter);
     }
 
-
-    @Override
-    public void onInputDialog(String desc) {
-
-    }
-
-    public void onInputDialogClick(String desc) {
-        mDiary.setDescription(desc);
-        mDiariesRepository.update(mDiary);
-        loadDiaries();
-    }
-
-
-
-    @Override
-    public void updateDiary(Diary diary) {
-        mDiary = diary;
-        mView.showInputDialog(diary.getTitle(), diary.getDescription());
-    }
 
 }

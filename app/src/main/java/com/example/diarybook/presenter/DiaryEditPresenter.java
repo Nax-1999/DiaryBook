@@ -28,7 +28,6 @@ public class DiaryEditPresenter implements DiaryEditContract.Presenter {
     }
 
 
-
     private boolean isAddDiary() {
         return TextUtils.isEmpty(mDiaryId);
     }
@@ -36,14 +35,6 @@ public class DiaryEditPresenter implements DiaryEditContract.Presenter {
     @Override
     public void destroy() {
 
-    }
-
-    @Override
-    public void onResult(int requestCode, int resultCode) {
-        if (Activity.RESULT_OK != resultCode) {
-            return;
-        }
-        mView.showSuccess();
     }
 
 
@@ -82,12 +73,18 @@ public class DiaryEditPresenter implements DiaryEditContract.Presenter {
         });
     }
 
+    /**
+     * 编辑已有日记
+     */
     private void updateDiary(String title, String description) {
         Diary diary = new Diary(title, description, mDiaryId);
         mDiariesRepository.update(diary);
         mView.showDiariesList();
     }
 
+    /**
+     * 新增日记
+     */
     private void createDiary(String title, String description) {
         Diary newDiary = new Diary(title, description);
         mDiariesRepository.update(newDiary);

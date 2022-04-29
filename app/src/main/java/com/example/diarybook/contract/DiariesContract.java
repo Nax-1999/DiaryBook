@@ -8,19 +8,16 @@ import com.example.diarybook.view.BaseView;
 public interface DiariesContract {
     interface View extends BaseView<Presenter> {
         void gotoWriteDiary();
-        void showInputDialog(final String title, final String desc);
         void showSuccess();
         void showError();
         boolean isActive();
         void setListAdapter(DiariesAdapter mListAdapter);
-
         void gotoUpdateDiary(String diaryId);
     }
 
     interface Presenter extends BasePresenter {
         void loadDiaries();
         void addDiary();
-        void updateDiary(Diary diary);
-        void onInputDialog(String desc);
+        void onResult(int requestCode, int resultCode);
     }
 }
