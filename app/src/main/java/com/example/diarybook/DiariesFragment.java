@@ -26,13 +26,7 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
 
 
     private DiariesContract.Presenter mPresenter;
-
     private RecyclerView mRecyclerView;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
@@ -44,6 +38,9 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
         return root;
     }
 
+    /**
+     * 配置日记recyclerView
+     */
     public void initDiariesList() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //添加分割线
@@ -84,10 +81,6 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
         super.onDestroy();
     }
 
-//    @Override fixme 重写??
-    public void setListAdapter(DiariesAdapter diariesAdapter) {
-        mRecyclerView.setAdapter(diariesAdapter);
-    }
 
     @Override
     public void gotoUpdateDiary(String diaryId) {
@@ -96,20 +89,19 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
         startActivity(intent);
     }
 
-    public boolean isActive() {
-        return isAdded();
+
+    @Override
+    public void setListAdapter(DiariesAdapter mListAdapter) {
+        mRecyclerView.setAdapter(mListAdapter);
     }
 
-    public void showError() {
-        showMessage(getString(R.string.error));
-    }
-
+    
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 
-
+    @Override
     public void gotoWriteDiary() {
         Intent intent = new Intent(getContext(), DiaryEditActivity.class);
         startActivity(intent);
@@ -117,13 +109,18 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
 
 
     @Override
-    public void showInputDialog(String title, String desc) {
-
+    public void showSuccess() {
+        showMessage(getString(R.string.success));
     }
 
     @Override
-    public void showSuccess() {
-        showMessage(getString(R.string.success));
+    public void showError() {
+        showMessage(getString(R.string.error));
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
     }
 
 

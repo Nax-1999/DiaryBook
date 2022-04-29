@@ -66,26 +66,33 @@ public class DiaryEditFragment extends Fragment implements DiaryEditContract.Vie
         return false;
     }
 
+
+    @Override
     public void showError() {
         showMessage(getString(R.string.error));
     }
 
-    public void setTitle(String title) {
-        mTitle.setText(title);
-    }
-
-    public void setDescription(String description) {
-        mDescription.setText(description);
-    }
-
-    public boolean isActive() {
-        return isAdded();
-    }
-
+    @Override
     public void showDiariesList() {
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
     }
+
+    @Override
+    public void setTitle(String title) {
+        mTitle.setText(title);
+    }
+
+    @Override
+    public void setDescription(String description) {
+        mDescription.setText(description);
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

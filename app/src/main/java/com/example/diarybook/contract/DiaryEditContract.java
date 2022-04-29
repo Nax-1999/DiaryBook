@@ -17,5 +17,6 @@ public interface DiaryEditContract {
     interface Presenter extends BasePresenter {
         void saveDiary(String title, String description);
         void requestDiary();
+        void onResult(int requestCode, int resultCode);
     }
 }

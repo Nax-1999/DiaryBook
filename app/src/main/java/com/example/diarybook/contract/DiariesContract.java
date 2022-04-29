@@ -8,7 +8,6 @@ import com.example.diarybook.view.BaseView;
 public interface DiariesContract {
     interface View extends BaseView<Presenter> {
         void gotoWriteDiary();
-        void showInputDialog(final String title, final String desc);
         void showSuccess();
         void showError();
         boolean isActive();
@@ -20,7 +19,5 @@ public interface DiariesContract {
     interface Presenter extends BasePresenter {
         void loadDiaries();
         void addDiary();
-        void updateDiary(Diary diary);
-        void onInputDialog(String desc);
     }
 }

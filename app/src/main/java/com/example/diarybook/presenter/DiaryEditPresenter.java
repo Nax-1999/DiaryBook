@@ -27,8 +27,6 @@ public class DiaryEditPresenter implements DiaryEditContract.Presenter {
         requestDiary();
     }
 
-
-
     private boolean isAddDiary() {
         return TextUtils.isEmpty(mDiaryId);
     }
