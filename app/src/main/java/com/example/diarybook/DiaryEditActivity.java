@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.example.diarybook.presenter.DiariesPresenter;
 import com.example.diarybook.presenter.DiaryEditPresenter;
 import com.example.diarybook.utils.ActivityUtils;
 

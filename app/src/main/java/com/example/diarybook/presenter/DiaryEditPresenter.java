@@ -32,11 +32,6 @@ public class DiaryEditPresenter implements DiaryEditContract.Presenter {
         return TextUtils.isEmpty(mDiaryId);
     }
 
-    @Override
-    public void destroy() {
-
-    }
-
 
     @Override
     public void saveDiary(String title, String description) {

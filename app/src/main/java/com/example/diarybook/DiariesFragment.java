@@ -1,10 +1,8 @@
 package com.example.diarybook;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,45 +13,78 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.diarybook.adapter.DiariesAdapter;
-import com.example.diarybook.contract.DiariesContract;
+import com.example.diarybook.databinding.FragmentDiariesBinding;
 
-public class DiariesFragment extends Fragment implements DiariesContract.View {
+public class DiariesFragment extends Fragment {
 
+    private DiariesViewModel mViewModel;
+//    private RecyclerView mRecyclerView;
 
-    private DiariesContract.Presenter mPresenter;
-    private RecyclerView mRecyclerView;
+    private FragmentDiariesBinding mDiariesBinding;
+
+    //fixme databiding怎么把这个Fragment和layout文件绑定起来的呢？
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_diaries, container, false);
-        this.mRecyclerView = root.findViewById(R.id.diaries_list);
+        mDiariesBinding = FragmentDiariesBinding.inflate(inflater, container, false);
+        mDiariesBinding.setViewModel(mViewModel);
+        mDiariesBinding.setLayoutManager(new LinearLayoutManager(getContext()));
         initDiariesList();
         setHasOptionsMenu(true);
-        return root;
+//        mViewModel.start();
+        return mDiariesBinding.getRoot();
+    }
+
+    public void setViewModel(DiariesViewModel mViewModel) {
+        this.mViewModel = mViewModel;
     }
 
     /**
      * 配置日记recyclerView
      */
     public void initDiariesList() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //添加分割线
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mDiariesBinding.diariesList.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mDiariesBinding.diariesList.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        mViewModel.start();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initRecyclerView();
+        initToast();
+    }
+
+    private void initToast() {
+        mViewModel.toastInfo.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                showMessage(mViewModel.toastInfo.get());
+            }
+        });
+    }
+
+    private void initRecyclerView() {
+        mViewModel.listAdapter.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                setListAdapter(mViewModel.listAdapter.get());
+            }
+        });
     }
 
     @Override
@@ -65,26 +96,12 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                mPresenter.addDiary();
                 return true;
         }
         return false;
     }
 
 
-    @Override
-    public void setPresenter(@NonNull DiariesContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
-
-    @Override
-    public void onDestroy() {
-        mPresenter.destroy();
-        super.onDestroy();
-    }
-
-
-    @Override
     public void gotoUpdateDiary(String diaryId) {
         Intent intent = new Intent(getContext(), DiaryEditActivity.class);
         intent.putExtra(DiaryEditFragment.DIARY_ID, diaryId);
@@ -93,9 +110,9 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
     }
 
 
-    @Override
     public void setListAdapter(DiariesAdapter mListAdapter) {
-        mRecyclerView.setAdapter(mListAdapter);
+//        mRecyclerView.setAdapter(mListAdapter);
+        mViewModel.listAdapter.set(mListAdapter);
     }
 
 
@@ -104,32 +121,24 @@ public class DiariesFragment extends Fragment implements DiariesContract.View {
     }
 
 
-    @Override
     public void gotoWriteDiary() {
         Intent intent = new Intent(getContext(), DiaryEditActivity.class);
         startActivityForResult(intent, 2);
     }
 
 
-    @Override
     public void showSuccess() {
         showMessage(getString(R.string.success));
     }
 
-    @Override
     public void showError() {
         showMessage(getString(R.string.error));
     }
 
-    @Override
     public boolean isActive() {
         return isAdded();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        mPresenter.onResult(requestCode, resultCode);
-    }
 
 
 }

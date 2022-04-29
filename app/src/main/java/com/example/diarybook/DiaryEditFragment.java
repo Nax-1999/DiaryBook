@@ -47,7 +47,6 @@ public class DiaryEditFragment extends Fragment implements DiaryEditContract.Vie
 
     @Override
     public void onDestroy() {
-        mPresenter.destroy();
         super.onDestroy();
     }
 

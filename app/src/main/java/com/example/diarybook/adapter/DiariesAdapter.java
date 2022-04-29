@@ -21,6 +21,10 @@ public class DiariesAdapter extends RecyclerView.Adapter<DiariesAdapter.DiaryHol
         mDiaries = diaries;
     }
 
+    public DiariesAdapter() {
+
+    }
+
     /**
      * 更新日记列表数据并刷新adapter
      * @param diaries

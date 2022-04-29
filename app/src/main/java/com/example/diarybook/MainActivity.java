@@ -1,15 +1,10 @@
 package com.example.diarybook;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.example.diarybook.presenter.DiariesPresenter;
 import com.example.diarybook.utils.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             diariesFragment = new DiariesFragment();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), diariesFragment, R.id.content);
         }
-        diariesFragment.setPresenter(new DiariesPresenter(diariesFragment));
+        diariesFragment.setViewModel(new DiariesViewModel(this));
     }
 
     private DiariesFragment getDiariesFragment() {
